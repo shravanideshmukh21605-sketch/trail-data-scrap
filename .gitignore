@@ -2,6 +2,6 @@
 __pycache__/
 *.pyc
 *.csv
-*.xlsx
+
 *.db
 audit_registry.txt
