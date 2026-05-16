@@ -168,7 +168,11 @@ async def scrape_entry(project, year, district, tahsil, village):
 
     for attempt in range(1, 3):
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True, args=['--no-sandbox'])
+            browser = await p.chromium.launch(
+                    headless=True, 
+                    channel="chromium-headless-shell",
+                    args=['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+                )
             context = await browser.new_context(no_viewport=True)
             page = await context.new_page()
             

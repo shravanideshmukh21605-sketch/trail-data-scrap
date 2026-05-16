@@ -5,8 +5,5 @@ set -o errexit
 # 1. Install Python packages
 pip install -r requirements.txt
 
-# 2. Tell Playwright where its home folder is 
-export PLAYWRIGHT_BROWSERS_PATH=$HOME/.cache/ms-playwright
-
-# 3. Install Chromium browser only (without system dependencies)
-python -m playwright install chromium
+# 2. Force Playwright to download ONLY the headless binary (bypasses sudo prompts)
+python -m playwright install chromium-headless-shell
