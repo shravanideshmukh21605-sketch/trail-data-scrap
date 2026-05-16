@@ -5,6 +5,8 @@ set -o errexit
 # 1. Install Python packages
 pip install -r requirements.txt
 
-# 2. Install Playwright browser and system libraries
-playwright install chromium
-playwright install-deps
+# 2. Tell Playwright where its home folder is 
+export PLAYWRIGHT_BROWSERS_PATH=$HOME/.cache/ms-playwright
+
+# 3. Install Chromium browser only (without system dependencies)
+python -m playwright install chromium
