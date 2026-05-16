@@ -168,12 +168,14 @@ async def scrape_entry(project, year, district, tahsil, village):
 
     for attempt in range(1, 3):
         async with async_playwright() as p:
-            os.environ["PLAYWRIGHT_BROWSERS_PATH"] = "/opt/render/.cache/ms-playwright"
+            # Tell python exactly where the browser files live
+            os.environ["PLAYWRIGHT_BROWSERS_PATH"] = os.path.expanduser("~/.cache/ms-playwright")
+            
             browser = await p.chromium.launch(
-                    headless=True, 
-                    channel="chromium-headless-shell",
-                    args=['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
-                )
+                headless=True, 
+                channel="chromium-headless-shell",
+                args=['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+            )
             context = await browser.new_context(no_viewport=True)
             page = await context.new_page()
             
